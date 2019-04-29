@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html ng-app="northwindApp">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="northwind-App.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row"  ng-controller="productsController">
+            <div class="col-md-8"  ng-init="GetAllProducts()">
+                <table class="table table-hover table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>ProductID</th>
+                            <th>ProductName</th>
+                            <th>UnitPrice</th>
+                            <th>UnitsInStock</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="p in plist">
+                            <td>{{p.ProductID}}</td>
+                            <td><a href="#" ng-mouseover="GetByProductID(p.ProductID)">{{p.ProductName}}</a></td>
+                            <td>{{p.UnitPrice}}</td>
+                            <td>{{p.UnitsInStock}}</td>
+                            <td>{{p.QuantityPerUnit}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-4" ng-if="detShow==true">
+                
+                <form style="position:fixed">
+                    <h2>ÜRÜN DETAYLARI</h2>
+                    <div class="form-group">
+                        <label>ProductName</label>
+                        <input class="form-control" type="text" placeholder="ProductName" ng-model="product.ProductName" />
+                        <label>UnitPrice</label>
+                        <input class="form-control" type="text" placeholder="UnitPrice" ng-model="product.UnitPrice" />
+                        <label>Categori</label>
+                        <select class="form-control" ng-init="product.CategoryID=options[0]" ng-model="product.CategoryID" ng-options="item.CategoryID as item.CategoryName for item in clist"></select>
+                        <label>Supplier</label>
+                        <select class="form-control" ng-init="product.SupplierID=options[0]" ng-model="product.SupplierID" ng-options="item.SupplierID as item.CompanyName for item in slist"></select>
+                        <br />
+                        <input type="button" ng-click="CreateProduct(product)" class="btn btn-info" value="Yeni KAYIT" />
+                        <input type="submit" ng-click="UpdateProduct(product)" class="btn btn-warning" value="GÜNCELLE" />
+                        <input type="submit" ng-click="DeleteProduct(product)" class="btn btn-warning" value="Sil" />
+                        {{msg}}
+                    </div>
+                </form>
+               
+            </div>
+        </div>
+    </div>
+</body>
+</html>

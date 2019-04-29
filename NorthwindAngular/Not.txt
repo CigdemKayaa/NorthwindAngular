@@ -1,0 +1,4 @@
+﻿1- Northwind yükledik
+2- NugetPackage den Angular ve Bootstrap yükledik
+3- Application adında Folder açtık ve içine Html.page den Index ve northwind-App.js açtık
+4- 
